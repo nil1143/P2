@@ -51,3 +51,28 @@ function updateScore(userChoice, computerChoice) {
         }
     }
 }
+
+// end game result
+function endGame() {
+    if (userScore > computerScore) {
+        resultMessage.textContent = `Game over! You win the game with a score of ${userScore}-${computerScore}.`;
+    } else if (computerScore > userScore) {
+        resultMessage.textContent = `Game over! Computer wins the game with a score of ${computerScore}-${userScore}.`;
+    } else {
+        resultMessage.textContent = `Game over! It's a draw with a score of ${userScore}-${computerScore}.`;
+    }
+
+    choices.forEach(choice => choice.removeEventListener('click', handleClick));
+}
+
+function userChoiceHandler(userChoice) {
+    const computerChoice = getComputerChoice();
+    updateScore(userChoice, computerChoice);
+}
+
+choices.forEach(choice => {
+    choice.addEventListener('click', () => {
+        const userChoice = choice.getAttribute('data-choice');
+        userChoiceHandler(userChoice);
+    });
+});
