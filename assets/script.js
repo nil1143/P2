@@ -30,3 +30,24 @@ function determineWinner(userChoice, computerChoice) {
         return `Computer wins! Computer chose ${computerChoice}, you chose ${userChoice}.`;
     }
 }
+
+// update score
+
+function updateScore(userChoice, computerChoice) {
+    if (userScore < 15 && computerScore < 15) {
+        const result = determineWinner(userChoice, computerChoice);
+        if (result.startsWith('You win')) {
+            userScore++;
+        } else if (result.startsWith('Computer wins')) {
+            computerScore++;
+        }
+
+        userScoreSpan.textContent = userScore;
+        computerScoreSpan.textContent = computerScore;
+        resultMessage.textContent = result;
+
+        if (userScore === 15 || computerScore === 15) {
+            endGame();
+        }
+    }
+}
